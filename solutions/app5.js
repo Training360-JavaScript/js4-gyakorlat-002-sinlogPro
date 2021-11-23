@@ -11,7 +11,24 @@ const getProductData = () => productData;
  */
 const sortProducts = (products = [{ name: '' }]) => {
     // itt dolgozz
+    return products.sort((a, b) => {
+        if (a.name < b.name) return -1
+        return a.name > b.name ? 1 : 0
+    });
+    // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
+    //
+    // Rövídebb változat:
+    // products.sort((a, b) => a.name < b.name ? -1 : (a.name > b.name ? 1 : 0))
+
 };
+
+const getProducts = (url = '') => {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => productData = sortProducts(data))
+        .catch(error => console.log(error))
+}
+
 
 /**
  * TODO: hozd létre a getProducts függvényt! 
@@ -43,6 +60,6 @@ const sortProducts = (products = [{ name: '' }]) => {
  * TODO: exportáld ki helyesen a getProducts függvényt!
  */
 export {
-    
+    getProducts,
     getProductData,
 }
